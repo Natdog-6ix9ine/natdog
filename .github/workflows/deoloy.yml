@@ -1,0 +1,41 @@
+name: Hexo Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 每次推送到 main 分支时触发
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出代码仓库
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Hexo 推荐 Node.js 版本
+
+      # 3. 安装依赖
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. 清理缓存文件（等同于 `hexo clean`）
+      - name: Clean Cache
+        run: npx hexo clean
+
+      # 5. 生成静态文件（等同于 `hexo generate`）
+      - name: Generate Static Files
+        run: npx hexo generate
+
+      # 6. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_KEY }}
+          publish_dir: ./public
+          destination_repo: Natdog-6ix9ine/Natdog-6ix9ine.github.io
