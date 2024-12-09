@@ -5,34 +5,17 @@ Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [docume
 
 ## Quick Start
 
-### Create a new post
+### 创建一个名字为`natdog`的hexo仓库
 
 ``` bash
-$ hexo new "My New Post"
+hexo init natdog
 ```
+这个步骤会自动npm install 安装的模块会放在文件夹中的`node_modules`文件夹下
 
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
+### 调试效果
 
 ``` bash
-$ hexo server
+hexo cl
+hexo g
+hexo s
 ```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)
