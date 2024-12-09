@@ -36,6 +36,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_KEY }}
+          deploy_key: ${{ secrets.GH_KEY }}
           publish_dir: ./public
           external_repository: Natdog-6ix9ine/Natdog-6ix9ine.github.io
