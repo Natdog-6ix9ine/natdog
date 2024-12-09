@@ -38,4 +38,5 @@ jobs:
         with:
           deploy_key: ${{ secrets.GH_KEY }}
           publish_dir: ./public
+          publish_branch: main # 指定部署到 main 分支
           external_repository: Natdog-6ix9ine/Natdog-6ix9ine.github.io
