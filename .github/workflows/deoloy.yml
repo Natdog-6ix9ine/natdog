@@ -21,18 +21,15 @@ jobs:
         with:
           node-version: '20.x'
 
-      # 3. 安装依赖
-      - name: Install Dependencies
-
-        run:
-          git checkout main
-          git pull origin main 
-          npm install
-
-      # 4. 暂存未提交的更改
-      - name: Stash changes if any
+      # 3. 切换到 main 分支
+      - name: Switch to Main Branch
         run: |
-          git diff --exit-code || git stash -u
+          git checkout main
+          git pull origin main
+
+      # 4. 安装依赖
+      - name: Install Dependencies
+        run: npm install
 
       # 5. 拉取所有远程分支，确保获取 `mysource` 分支
       - name: Fetch all branches
