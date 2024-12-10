@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Hexo 推荐 Node.js 版本
+          node-version: '20.x' # Hexo 推荐 Node.js 版本
 
       # 3. 安装依赖
       - name: Install Dependencies
@@ -27,7 +27,6 @@ jobs:
 
       # 4. 如果是 mysource 分支推送，合并并复制文件到 source 文件夹
       - name: Sync mysource to source folder (only on mysource push)
-        if: github.ref == 'refs/heads/mysource'
         run: |
           # 创建一个新的临时目录，将 mysource 内容复制到 source 文件夹
           git fetch origin main
