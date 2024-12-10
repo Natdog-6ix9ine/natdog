@@ -34,17 +34,23 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      # 6. 同步 mysource 分支内容到 source 文件夹
-      - name: Sync mysource to source folder
+      # 6. 同步 mysource 分支内容到 main 分支的 source 文件夹
+      - name: Sync mysource to source folder in main
         run: |
           # 切换到 mysource 分支并获取内容
           git checkout mysource || git checkout -b mysource origin/mysource
-          
-          # 创建 source 文件夹（如果不存在）
-          mkdir -p source
 
-          # 排除 source 文件夹自身，复制内容
-          rsync -av --exclude='source/' ./ ./source/
+          # 创建临时文件夹以保存 mysource 内容
+          mkdir -p temp_source
+          rsync -av --exclude='.git/' --exclude='node_modules/' ./ ./temp_source/
+
+          # 切换回 main 分支
+          git checkout main
+          git pull origin main
+
+          # 将 mysource 内容复制到 main 分支的 source 文件夹
+          mkdir -p source
+          rsync -av --delete temp_source/ ./source/
 
       # 7. 清理缓存文件（等同于 `hexo clean`）
       - name: Clean Cache
