@@ -1,0 +1,76 @@
+name: Hexo Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main        # 监听 main 分支的推送
+      - mysource    # 监听 mysource 分支的推送
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出代码仓库
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # 3. 暂存未提交的更改
+      - name: Stash changes if any
+        run: |
+          git checkout main
+          git diff --exit-code || git stash -u
+
+      # 4. 切换到 mysource 分支并获取内容
+      - name: Checkout mysource Branch
+        run: |
+          git fetch origin mysource:mysource || exit 1
+          git checkout mysource
+
+      # 5. 创建临时文件夹以保存 mysource 内容
+      - name: Backup mysource Content
+        run: |
+          mkdir -p temp_source
+          rsync -av --exclude='.git/' --exclude='node_modules/' ./ ./temp_source/
+
+      # 6. 切换回 main 分支
+      - name: Checkout Main Branch
+        run: |
+          git checkout main
+          git pull origin main
+
+      # 7. 将 mysource 内容同步到 main 分支的 source 文件夹
+      - name: Sync mysource to source folder in main
+        run: |
+          mkdir -p source
+          rsync -av --delete temp_source/ ./source/
+
+      # 8. 安装依赖（包含 Hexo）
+      - name: Install Dependencies
+        run: |
+          rm -rf node_modules
+          npm install --force
+          npm install hexo --save
+
+      # 9. 清理缓存文件（等同于 `hexo clean`）
+      - name: Clean Cache
+        run: npx hexo clean
+
+      # 10. 生成静态文件（等同于 `hexo generate`）
+      - name: Generate Static Files
+        run: npx hexo generate
+
+      # 11. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GH_KEY }}
+          publish_dir: ./public
+          publish_branch: main
+          external_repository: Natdog-6ix9ine/Natdog-6ix9ine.github.io
