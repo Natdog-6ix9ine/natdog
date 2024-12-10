@@ -24,6 +24,7 @@ jobs:
       # 3. 暂存未提交的更改
       - name: Stash changes if any
         run: |
+          git fetch origin main:main
           git checkout main
           git diff --exit-code || git stash -u
 
