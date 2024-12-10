@@ -23,7 +23,11 @@ jobs:
 
       # 3. 安装依赖
       - name: Install Dependencies
-        run: npm install
+
+        run:
+          git checkout main
+          git pull origin main 
+          npm install
 
       # 4. 暂存未提交的更改
       - name: Stash changes if any
