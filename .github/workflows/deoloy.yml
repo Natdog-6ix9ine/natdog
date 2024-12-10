@@ -19,23 +19,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '16'
 
       # 3. 安装依赖
       - name: Install Dependencies
         run: npm install
 
-      # 4. 拉取所有远程分支，确保获取 mysource 分支
+      # 4. 拉取所有远程分支，确保获取 `mysource` 分支
       - name: Fetch all branches
         run: |
           git fetch --all
 
-      # 5. 如果有未提交的更改，先暂存
-      - name: Stash changes if any
-        run: |
-          git diff --exit-code || git stash -u
-
-      # 6. 将 mysource 内容复制到 source 文件夹
+      # 5. 将 mysource 内容复制到 source 文件夹
       - name: Sync mysource to source folder
         run: |
           # 获取 main 分支的最新代码
@@ -55,21 +50,16 @@ jobs:
           # 将内容放到 source 文件夹
           mkdir -p source
           cp -r * source/
-          
-          # 提交更改并推送到 main 分支
-          git add .
-          git commit -m "Update source with mysource content"
-          git push origin main
 
-      # 7. 清理缓存文件（等同于 `hexo clean`）
+      # 6. 清理缓存文件（等同于 `hexo clean`）
       - name: Clean Cache
         run: npx hexo clean
 
-      # 8. 生成静态文件（等同于 `hexo generate`）
+      # 7. 生成静态文件（等同于 `hexo generate`）
       - name: Generate Static Files
         run: npx hexo generate
 
-      # 9. 部署到 GitHub Pages
+      # 8. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
