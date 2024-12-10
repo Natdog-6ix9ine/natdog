@@ -36,7 +36,7 @@ jobs:
       - name: Backup mysource Content
         run: |
           mkdir -p temp_source
-          rsync -av --exclude='.git/' ./ ./temp_source/
+          rsync -av --exclude='.git/' --exclude='node_modules/' ./ ./temp_source/
 
       # 6. 切换回 main 分支
       - name: Checkout Main Branch
@@ -50,15 +50,22 @@ jobs:
           mkdir -p source
           rsync -av --delete temp_source/ ./source/
 
-      # 8. 清理缓存文件
+      # 8. 安装依赖（包含 Hexo）
+      - name: Install Dependencies
+        run: |
+          rm -rf node_modules
+          npm install --force
+          npm install hexo --save
+
+      # 9. 清理缓存文件（等同于 `hexo clean`）
       - name: Clean Cache
         run: npx hexo clean
 
-      # 9. 生成静态文件
+      # 10. 生成静态文件（等同于 `hexo generate`）
       - name: Generate Static Files
         run: npx hexo generate
 
-      # 10. 部署到 GitHub Pages
+      # 11. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
