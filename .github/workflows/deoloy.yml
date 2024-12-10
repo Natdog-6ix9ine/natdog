@@ -40,9 +40,11 @@ jobs:
           # 切换到 mysource 分支并获取内容
           git checkout mysource || git checkout -b mysource origin/mysource
           
-          # 将内容放到 source 文件夹
+          # 创建 source 文件夹（如果不存在）
           mkdir -p source
-          cp -r * source/
+
+          # 排除 source 文件夹自身，复制内容
+          rsync -av --exclude='source/' ./ ./source/
 
       # 7. 清理缓存文件（等同于 `hexo clean`）
       - name: Clean Cache
