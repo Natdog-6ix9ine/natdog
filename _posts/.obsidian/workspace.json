@@ -1,0 +1,170 @@
+{
+  "main": {
+    "id": "9f7fb4767209cbba",
+    "type": "split",
+    "children": [
+      {
+        "id": "357fb0ca9a06e6d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d5eeab493193e6a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "文章/配置环境.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "配置环境"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "178b2e7031d46a9e",
+    "type": "split",
+    "children": [
+      {
+        "id": "ecf76af714d03497",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f695f17c1311dcf1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "365d9bd6178b9889",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "873a1658b0f58ee4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "568677389523c109",
+    "type": "split",
+    "children": [
+      {
+        "id": "17727f0475f3c5e6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72df0103e8b51bd3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "文章/配置环境.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "配置环境 的反向链接列表"
+            }
+          },
+          {
+            "id": "7925bea8e2023062",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "文章/配置环境.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "配置环境 的出链列表"
+            }
+          },
+          {
+            "id": "359e8dc2601856a3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "af89296f89791c31",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "文章/配置环境.md"
+              },
+              "icon": "lucide-list",
+              "title": "配置环境 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "d5eeab493193e6a1",
+  "lastOpenFiles": [
+    "文章/新环境写博客.md",
+    "文章/创建算子.md"
+  ]
+}
