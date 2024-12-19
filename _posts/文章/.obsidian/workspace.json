@@ -1,0 +1,171 @@
+{
+  "main": {
+    "id": "d7901271fcce007a",
+    "type": "split",
+    "children": [
+      {
+        "id": "6e8fd85ad741c9d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ae25acaf44e292ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "新环境写博客.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "新环境写博客"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "de50d0a218a0869e",
+    "type": "split",
+    "children": [
+      {
+        "id": "7b3f1d5b2b05696e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "57ed24e5a8124818",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "6592bb2597ff6d37",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "c50944063a752b4b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d5253598bcf9d0a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "e69ffdd48148861d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e1c463f9e880af4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "新环境写博客.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "新环境写博客 的反向链接列表"
+            }
+          },
+          {
+            "id": "e77fd32f61bfa350",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "新环境写博客.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "新环境写博客 的出链列表"
+            }
+          },
+          {
+            "id": "265a060ec920faf3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "b4dbfa30b3148942",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "新环境写博客.md"
+              },
+              "icon": "lucide-list",
+              "title": "新环境写博客 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "ae25acaf44e292ab",
+  "lastOpenFiles": [
+    "创建算子.md",
+    "新环境写博客.md",
+    "配置环境.md"
+  ]
+}
