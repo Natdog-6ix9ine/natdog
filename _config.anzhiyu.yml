@@ -791,7 +791,7 @@ preloader:
   source: 3
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url:
-  avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg # 自定加载动画义头像
+  avatar: https://vip.123pan.cn/1835097054/yk6baz03t0n000d5qav0d89p1dybksy6DIYwAIa2AwayAcxyAwY=.jpg # 自定加载动画义头像
 
 # aside (侧边栏)
 # --------------------------------------
@@ -1048,7 +1048,7 @@ css_prefix: true
 
 # 首页顶部相关配置
 home_top:
-  enable: true # 开关
+  enable: false # 开关
   timemode: date #date/updated
   title: 生活明朗
   subTitle: 万物可爱。
