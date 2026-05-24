@@ -1,0 +1,16 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+~$*
+
+# Obsidian workspace（这个不需要同步）
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian 插件（包含敏感信息）
+.obsidian/plugins/
