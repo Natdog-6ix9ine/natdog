@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: config
-          submodules: recursive
 
       # 2. 检出 main 分支的文章到 source/_posts
       - name: Checkout main branch articles
