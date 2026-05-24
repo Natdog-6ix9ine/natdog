@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Templates/bug.md",
+                "file": "4_踩坑记录/DataCopy问题.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bug"
+              "title": "DataCopy问题"
             }
           }
         ]
@@ -193,19 +193,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a193a5daf4b732cc",
+  "active": "ea2bc0fa07bed361",
   "lastOpenFiles": [
+    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
+    "4_踩坑记录/DataCopy问题.md",
+    "Templates/bug.md",
+    "3_环境工程/CUDA开发环境搭建.md.tmp.3156.816655ef1466",
     "Templates/essay.md",
     "Templates/project.md",
     "Templates/tech-note.md",
-    "Templates/bug.md",
     "3_环境工程/创建算子.md",
     "3_环境工程/配置环境.md",
     "3_环境工程/配置昇腾开发环境.md",
     "3_环境工程/新环境写博客.md",
     "3_环境工程/CUDA开发环境搭建.md",
-    "4_踩坑记录/DataCopy问题.md",
-    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "3_环境工程/SSH配置环境.md",
     "1_算子开发/CUDA Softmax 算子优化.md",
     "0_Inbox/工作思考.md",
@@ -227,7 +228,6 @@
     "3_环境工程/assets/配置昇腾开发环境/file-20251212195050376.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212194230679.png",
     "copilot/memory/Recent Conversations.md",
-    "1_算子开发/创建算子.md",
     "4_踩坑记录/assets/DataCopy问题",
     "4_踩坑记录/assets",
     "3_环境工程/assets/配置昇腾开发环境",
@@ -236,7 +236,6 @@
     "4_踩坑记录",
     "3_环境工程",
     "2_性能调试",
-    "1_算子开发",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212194230679.png",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212195050376.png",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212195152903.png",

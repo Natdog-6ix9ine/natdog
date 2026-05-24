@@ -1,4 +1,8 @@
 ---
+title: "CUDA开发环境搭建"
+date: 2025-12-16
+categories:
+  - 环境工程
 type: essay
 created: 2025-12-16
 tags: []
