@@ -38,17 +38,22 @@ jobs:
             if ! head -n 1 "$file" | grep -q "^---$"; then
               # 提取文件名作为标题（去掉路径和扩展名）
               title=$(basename "$file" .md)
+              # 提取相对路径
+              rel_path=$(echo "$file" | sed 's|source/_posts/||')
               # 提取目录名作为分类
-              category=$(dirname "$file" | sed 's|source/_posts/||' | sed 's|/|-|g')
+              dir_name=$(dirname "$rel_path")
               # 获取文件修改时间作为日期
               date=$(stat -c %y "$file" | cut -d' ' -f1)
               # 创建临时文件
               temp_file="${file}.tmp"
               # 写入 frontmatter
               echo "---" > "$temp_file"
-              echo "title: $title" >> "$temp_file"
+              echo "title: \"$title\"" >> "$temp_file"
               echo "date: $date" >> "$temp_file"
-              if [ "$category" != "source/_posts" ]; then
+              # 只有在子目录中的文章才添加分类
+              if [ "$dir_name" != "." ]; then
+                # 提取分类名（去掉数字前缀，如 "1_算子开发" -> "算子开发"）
+                category=$(echo "$dir_name" | sed 's/^[0-9]*_//')
                 echo "categories:" >> "$temp_file"
                 echo "  - $category" >> "$temp_file"
               fi
@@ -58,6 +63,7 @@ jobs:
               cat "$file" >> "$temp_file"
               # 替换原文件
               mv "$temp_file" "$file"
+              echo "Added frontmatter to: $file (category: $category)"
             fi
           done
 
