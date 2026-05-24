@@ -193,15 +193,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a193a5daf4b732cc",
+  "active": "ea2bc0fa07bed361",
   "lastOpenFiles": [
     "创建算子.md",
+    "Templates/bug.md",
     "测试自动部署.md",
     "配置环境.md",
     "Templates/tech-note.md",
     "Templates/project.md",
     "Templates/essay.md",
-    "Templates/bug.md",
     "新环境写博客.md",
     "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "conflict-files-obsidian-git.md",
