@@ -35,7 +35,25 @@ jobs:
         run: |
           find source/_posts -name "*.md" -type f | while read file; do
             # 检查文件是否已有 frontmatter（以 --- 开头）
-            if ! head -n 1 "$file" | grep -q "^---$"; then
+            if head -n 1 "$file" | grep -q "^---$"; then
+              # 文件已有 frontmatter，检查是否缺少 date 字段
+              if ! grep -q "^date:" "$file"; then
+                # 获取文件修改时间作为日期
+                date=$(stat -c %y "$file" | cut -d' ' -f1)
+                # 在第二个 --- 之前插入 date
+                awk -v date="$date" '
+                  /^---$/ {
+                    if (++count == 2) {
+                      print "date: " date
+                    }
+                  }
+                  { print }
+                ' "$file" > "${file}.tmp"
+                mv "${file}.tmp" "$file"
+                echo "Added date to existing frontmatter: $file"
+              fi
+            else
+              # 文件没有 frontmatter，创建完整的 frontmatter
               # 提取文件名作为标题（去掉路径和扩展名）
               title=$(basename "$file" .md)
               # 提取相对路径
@@ -63,7 +81,7 @@ jobs:
               cat "$file" >> "$temp_file"
               # 替换原文件
               mv "$temp_file" "$file"
-              echo "Added frontmatter to: $file (category: $category)"
+              echo "Added full frontmatter to: $file (category: $category)"
             fi
           done
 
