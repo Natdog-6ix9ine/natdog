@@ -1,0 +1,58 @@
+name: Hexo Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main        # 监听 main 分支（文章分支）的推送
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出 config 分支（获取配置文件）
+      - name: Checkout config branch
+        uses: actions/checkout@v3
+        with:
+          ref: config
+
+      # 2. 检出 main 分支的文章到 source/_posts
+      - name: Checkout main branch articles
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          path: source/_posts
+
+      # 3. 清理 source/_posts 中的 .git 和 .obsidian
+      - name: Clean up article directory
+        run: |
+          rm -rf source/_posts/.git
+          rm -rf source/_posts/.obsidian
+          rm -rf source/_posts/.github
+
+      # 4. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # 5. 安装依赖
+      - name: Install Dependencies
+        run: npm install
+
+      # 6. 清理缓存
+      - name: Clean Cache
+        run: npx hexo clean
+
+      # 7. 生成静态文件
+      - name: Generate Static Files
+        run: npx hexo generate
+
+      # 8. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GH_KEY }}
+          publish_dir: ./public
+          publish_branch: main
+          external_repository: Natdog-6ix9ine/Natdog-6ix9ine.github.io
