@@ -1,0 +1,3 @@
+[submodule "themes/async"]
+	path = themes/async
+	url = https://github.com/MaLuns/hexo-theme-async.git
