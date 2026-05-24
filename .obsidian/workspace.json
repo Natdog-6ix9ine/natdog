@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Templates/bug.md",
+                "file": "新环境写博客.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bug"
+              "title": "新环境写博客"
             }
           }
         ]
@@ -193,14 +193,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ea2bc0fa07bed361",
+  "active": "cc5c6847064bf11e",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
-    "Templates/bug.md",
     "配置环境.md",
-    "测试自动部署.md",
-    "新环境写博客.md",
     "创建算子.md",
+    "测试自动部署.md",
+    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
+    "Templates/bug.md",
+    "conflict-files-obsidian-git.md",
+    "新环境写博客.md",
     "YOLO",
     "Templates/essay.md",
     "Templates/project.md",
@@ -208,7 +209,6 @@
     "Excalidraw/Drawing 2026-05-01 00.41.26.excalidraw.md",
     "Excalidraw/Drawing 2026-04-30 23.45.26.excalidraw.md",
     "4_踩坑记录/DataCopy问题.md",
-    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "3_环境工程/配置昇腾开发环境.md",
     "3_环境工程/新环境写博客.md",
     "3_环境工程/CUDA开发环境搭建.md",
