@@ -1,0 +1,10 @@
+# Navigation menu
+menu:
+  - name: 首页
+    url: /
+  - name: 归档
+    url: /archives
+  - name: 分类
+    url: /categories
+  - name: 标签
+    url: /tags
