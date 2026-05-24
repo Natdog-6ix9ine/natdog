@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": 1779617721194,
+  "scopes": {
+    "0::15px|19.5px|\"??\", \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif|na|1rem|calc(1rem * 2.5)": {
+      "widthBucket": 0,
+      "styleSignature": "15px|19.5px|\"??\", \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif|na|1rem|calc(1rem * 2.5)",
+      "updatedAt": 1779617721194,
+      "heights": {
+        "bottom-anchor": 1
+      }
+    },
+    "400::15px|19.5px|\"??\", \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif|na|1rem|calc(1rem * 2.5)": {
+      "widthBucket": 400,
+      "styleSignature": "15px|19.5px|\"??\", \"??\", \"??\", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, \"Segoe UI\", \"Google Sans Flex\", Roboto, \"Inter Variable\", Inter, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", sans-serif|na|1rem|calc(1rem * 2.5)",
+      "updatedAt": 1779617715601,
+      "heights": {
+        "bottom-anchor": 10
+      }
+    },
+    "0::default": {
+      "widthBucket": 0,
+      "styleSignature": "default",
+      "updatedAt": 1779613571989,
+      "heights": {
+        "bottom-anchor": 10
+      }
+    }
+  }
+}

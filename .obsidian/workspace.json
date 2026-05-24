@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "1de64bf36e8517b6",
+        "id": "85064fee9385e860",
         "type": "tabs",
         "children": [
           {
-            "id": "ea2bc0fa07bed361",
+            "id": "781bea669f3263b8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "4_踩坑记录/DataCopy问题.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "DataCopy问题"
+              "title": "新标签页"
             }
           }
         ]
@@ -170,9 +166,19 @@
               "icon": "wand-sparkles",
               "title": "新对话"
             }
+          },
+          {
+            "id": "dceb0c65a1f957c0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -193,50 +199,50 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ea2bc0fa07bed361",
+  "active": "781bea669f3263b8",
   "lastOpenFiles": [
-    "1_算子开发/CUDA Softmax 算子优化.md",
-    "1_算子开发/开发昇腾AscendC算子.md",
-    "1_算子开发/创建算子.md",
-    "4_踩坑记录/DataCopy问题.md",
-    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
-    "Templates/bug.md",
-    "3_环境工程/CUDA开发环境搭建.md.tmp.3156.816655ef1466",
-    "Templates/essay.md",
-    "Templates/project.md",
-    "Templates/tech-note.md",
-    "3_环境工程/创建算子.md",
-    "3_环境工程/配置环境.md",
+    "Excalidraw/Drawing 2026-05-24 18.15.16.excalidraw.md",
+    "Excalidraw/Drawing 2026-05-24 18.15.14.excalidraw.md",
     "3_环境工程/配置昇腾开发环境.md",
+    "Excalidraw",
+    "3_环境工程/配置环境.md",
     "3_环境工程/新环境写博客.md",
     "3_环境工程/CUDA开发环境搭建.md",
+    "3_环境工程/创建算子.md",
+    "1_算子开发/创建算子.md",
+    "1_算子开发/开发昇腾AscendC算子.md",
+    "1_算子开发/CUDA Softmax 算子优化.md",
+    "1_算子开发/未命名.md",
+    "2026-05-24.md",
+    "Templates/bug.md",
+    "README.md",
+    "未命名.md",
+    "Templates/essay.md",
+    "Templates/essay.md.tmp.3156.11041c2a4ac1",
+    "Templates/bug.md.tmp.3156.f218cc0c4c34",
+    "Templates/project.md.tmp.3156.81e090667c2d",
+    "Templates/tech-note.md.tmp.3156.26bd58338c10",
+    "Templates/project.md",
+    "Templates/tech-note.md",
+    "Templates/essay.md.tmp.3156.e87fcd1443e1",
+    "Templates/bug.md.tmp.3156.e685d6a11cd0",
+    "Templates/project.md.tmp.3156.7bbd8d2b8edc",
+    "Templates/tech-note.md.tmp.3156.0e89c5ee027c",
+    "2025-12-12.md",
+    "4_踩坑记录/DataCopy问题.md",
+    "4_踩坑记录/Clash代理连不上linuxdo排查.md",
+    "3_环境工程/CUDA开发环境搭建.md.tmp.3156.816655ef1466",
     "3_环境工程/SSH配置环境.md",
     "0_Inbox/工作思考.md",
     "0_Inbox/今日待办.md",
     "0_Inbox/硕士学位论文.md",
     "0_Inbox/香橙派 AIpro 8T 算子测试环境搭建笔记.md",
-    "创建算子.md",
-    "测试自动部署.md",
-    "配置环境.md",
-    "新环境写博客.md",
-    "conflict-files-obsidian-git.md",
-    "YOLO",
-    "Excalidraw/Drawing 2026-05-01 00.41.26.excalidraw.md",
-    "Excalidraw/Drawing 2026-04-30 23.45.26.excalidraw.md",
     "4_踩坑记录/assets/DataCopy问题/file-20251212164824317.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212195152903.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212195217188.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212194535360.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212195050376.png",
     "3_环境工程/assets/配置昇腾开发环境/file-20251212194230679.png",
-    "4_踩坑记录/assets/DataCopy问题",
-    "4_踩坑记录/assets",
-    "3_环境工程/assets/配置昇腾开发环境",
-    "3_环境工程/assets",
-    "Templates",
-    "4_踩坑记录",
-    "3_环境工程",
-    "2_性能调试",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212194230679.png",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212195050376.png",
     "2_项目实战/assets/配置昇腾开发环境/file-20251212195152903.png",
