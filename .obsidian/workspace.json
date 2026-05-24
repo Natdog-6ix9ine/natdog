@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3_环境工程/配置昇腾开发环境.md",
+                "file": "Templates/project.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "配置昇腾开发环境"
+              "title": "project"
             }
           }
         ]
@@ -195,11 +195,13 @@
   },
   "active": "ea2bc0fa07bed361",
   "lastOpenFiles": [
+    "Templates/essay.md",
+    "Templates/bug.md",
+    "3_环境工程/配置昇腾开发环境.md",
     "3_环境工程/配置环境.md",
     "3_环境工程/创建算子.md",
     "3_环境工程/CUDA开发环境搭建.md",
     "3_环境工程/新环境写博客.md",
-    "3_环境工程/配置昇腾开发环境.md",
     "4_踩坑记录/DataCopy问题.md",
     "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "3_环境工程/SSH配置环境.md",
@@ -208,13 +210,11 @@
     "0_Inbox/今日待办.md",
     "0_Inbox/硕士学位论文.md",
     "0_Inbox/香橙派 AIpro 8T 算子测试环境搭建笔记.md",
-    "Templates/bug.md",
     "创建算子.md",
     "测试自动部署.md",
     "配置环境.md",
     "Templates/tech-note.md",
     "Templates/project.md",
-    "Templates/essay.md",
     "新环境写博客.md",
     "conflict-files-obsidian-git.md",
     "YOLO",
