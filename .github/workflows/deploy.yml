@@ -34,88 +34,88 @@ jobs:
       - name: Add frontmatter to articles
         run: |
           python3 << 'EOF'
-import os
-import re
-from pathlib import Path
-from datetime import datetime
+          import os
+          import re
+          from pathlib import Path
+          from datetime import datetime
 
-def process_markdown_file(file_path):
-    """处理单个 Markdown 文件的 frontmatter"""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+          def process_markdown_file(file_path):
+              """处理单个 Markdown 文件的 frontmatter"""
+              with open(file_path, 'r', encoding='utf-8') as f:
+                  content = f.read()
 
-    # 提取文件信息
-    file_name = Path(file_path).stem
-    rel_path = str(Path(file_path).relative_to('source/_posts'))
-    dir_name = Path(rel_path).parent
+              # 提取文件信息
+              file_name = Path(file_path).stem
+              rel_path = str(Path(file_path).relative_to('source/_posts'))
+              dir_name = Path(rel_path).parent
 
-    # 获取文件修改时间
-    mtime = os.path.getmtime(file_path)
-    file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+              # 获取文件修改时间
+              mtime = os.path.getmtime(file_path)
+              file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
 
-    # 提取分类（去掉数字前缀）
-    category = None
-    if str(dir_name) != '.':
-        category = re.sub(r'^\d+_', '', str(dir_name))
+              # 提取分类（去掉数字前缀）
+              category = None
+              if str(dir_name) != '.':
+                  category = re.sub(r'^\d+_', '', str(dir_name))
 
-    # 检查是否有 frontmatter
-    frontmatter_match = re.match(r'^---\n(.*?)\n---\n(.*)$', content, re.DOTALL)
+              # 检查是否有 frontmatter
+              frontmatter_match = re.match(r'^---\n(.*?)\n---\n(.*)$', content, re.DOTALL)
 
-    if frontmatter_match:
-        # 已有 frontmatter，检查并补充
-        frontmatter = frontmatter_match.group(1)
-        body = frontmatter_match.group(2)
+              if frontmatter_match:
+                  # 已有 frontmatter，检查并补充
+                  frontmatter = frontmatter_match.group(1)
+                  body = frontmatter_match.group(2)
 
-        has_title = bool(re.search(r'^title:', frontmatter, re.MULTILINE))
-        has_date = bool(re.search(r'^date:', frontmatter, re.MULTILINE))
-        has_categories = bool(re.search(r'^categories:', frontmatter, re.MULTILINE))
+                  has_title = bool(re.search(r'^title:', frontmatter, re.MULTILINE))
+                  has_date = bool(re.search(r'^date:', frontmatter, re.MULTILINE))
+                  has_categories = bool(re.search(r'^categories:', frontmatter, re.MULTILINE))
 
-        modified = False
+                  modified = False
 
-        # 补充缺失字段
-        if not has_title:
-            frontmatter = f'title: "{file_name}"\n' + frontmatter
-            modified = True
-            print(f"  Added title: {file_path}")
+                  # 补充缺失字段
+                  if not has_title:
+                      frontmatter = f'title: "{file_name}"\n' + frontmatter
+                      modified = True
+                      print(f"  Added title: {file_path}")
 
-        if not has_date:
-            frontmatter = f'date: {file_date}\n' + frontmatter
-            modified = True
-            print(f"  Added date: {file_path}")
+                  if not has_date:
+                      frontmatter = f'date: {file_date}\n' + frontmatter
+                      modified = True
+                      print(f"  Added date: {file_path}")
 
-        if not has_categories and category:
-            frontmatter = f'categories:\n  - {category}\n' + frontmatter
-            modified = True
-            print(f"  Added category '{category}': {file_path}")
+                  if not has_categories and category:
+                      frontmatter = f'categories:\n  - {category}\n' + frontmatter
+                      modified = True
+                      print(f"  Added category '{category}': {file_path}")
 
-        if modified:
-            new_content = f'---\n{frontmatter}\n---\n{body}'
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(new_content)
-    else:
-        # 没有 frontmatter，创建完整的
-        frontmatter_lines = ['---', f'title: "{file_name}"', f'date: {file_date}']
+                  if modified:
+                      new_content = f'---\n{frontmatter}\n---\n{body}'
+                      with open(file_path, 'w', encoding='utf-8') as f:
+                          f.write(new_content)
+              else:
+                  # 没有 frontmatter，创建完整的
+                  frontmatter_lines = ['---', f'title: "{file_name}"', f'date: {file_date}']
 
-        if category:
-            frontmatter_lines.extend(['categories:', f'  - {category}'])
+                  if category:
+                      frontmatter_lines.extend(['categories:', f'  - {category}'])
 
-        frontmatter_lines.append('---')
-        new_content = '\n'.join(frontmatter_lines) + '\n\n' + content
+                  frontmatter_lines.append('---')
+                  new_content = '\n'.join(frontmatter_lines) + '\n\n' + content
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
+                  with open(file_path, 'w', encoding='utf-8') as f:
+                      f.write(new_content)
 
-        print(f"  Created frontmatter: {file_path}")
+                  print(f"  Created frontmatter: {file_path}")
 
-# 处理所有 Markdown 文件
-for root, dirs, files in os.walk('source/_posts'):
-    for file in files:
-        if file.endswith('.md'):
-            file_path = os.path.join(root, file)
-            process_markdown_file(file_path)
+          # 处理所有 Markdown 文件
+          for root, dirs, files in os.walk('source/_posts'):
+              for file in files:
+                  if file.endswith('.md'):
+                      file_path = os.path.join(root, file)
+                      process_markdown_file(file_path)
 
-print("Frontmatter processing completed!")
-EOF
+          print("Frontmatter processing completed!")
+          EOF
 
       # 5. 设置 Node.js 环境
       - name: Setup Node.js
