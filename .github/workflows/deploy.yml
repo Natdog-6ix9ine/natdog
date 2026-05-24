@@ -3,70 +3,52 @@ name: Hexo Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main        # 监听 main 分支的推送
-      - mysource    # 监听 mysource 分支的推送
+      - main        # 监听 main 分支（文章分支）的推送
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 检出代码仓库
-      - name: Checkout Repository
+      # 1. 检出 config 分支（获取配置文件）
+      - name: Checkout config branch
         uses: actions/checkout@v3
+        with:
+          ref: config
 
-      # 2. 设置 Node.js 环境
+      # 2. 检出 main 分支的文章到 source/_posts
+      - name: Checkout main branch articles
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          path: source/_posts
+
+      # 3. 清理 source/_posts 中的 .git 和 .obsidian
+      - name: Clean up article directory
+        run: |
+          rm -rf source/_posts/.git
+          rm -rf source/_posts/.obsidian
+          rm -rf source/_posts/.github
+
+      # 4. 设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      # 3. 暂存未提交的更改
-      - name: Stash changes if any
-        run: |
-          git checkout main
-          git diff --exit-code || git stash -u
-
-      # 4. 切换到 mysource 分支并获取内容
-      - name: Checkout mysource Branch
-        run: |
-          git fetch origin mysource:mysource || exit 1
-          git checkout mysource
-
-      # 5. 创建临时文件夹以保存 mysource 内容
-      - name: Backup mysource Content
-        run: |
-          mkdir -p temp_source
-          rsync -av --exclude='.git/' --exclude='node_modules/' ./ ./temp_source/
-
-      # 6. 切换回 main 分支
-      - name: Checkout Main Branch
-        run: |
-          git checkout main
-          git pull origin main
-
-      # 7. 将 mysource 内容同步到 main 分支的 source 文件夹
-      - name: Sync mysource to source folder in main
-        run: |
-          mkdir -p source
-          rsync -av --delete temp_source/ ./source/
-
-      # 8. 安装依赖（包含 Hexo）
+      # 5. 安装依赖
       - name: Install Dependencies
-        run: |
-          rm -rf node_modules
-          npm install --force
-          npm install hexo --save
+        run: npm install
 
-      # 9. 清理缓存文件（等同于 `hexo clean`）
+      # 6. 清理缓存
       - name: Clean Cache
         run: npx hexo clean
 
-      # 10. 生成静态文件（等同于 `hexo generate`）
+      # 7. 生成静态文件
       - name: Generate Static Files
         run: npx hexo generate
 
-      # 11. 部署到 GitHub Pages
+      # 8. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
