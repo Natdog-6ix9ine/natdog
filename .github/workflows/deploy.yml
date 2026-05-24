@@ -30,25 +30,56 @@ jobs:
           rm -rf source/_posts/.obsidian
           rm -rf source/_posts/.github
 
-      # 4. 设置 Node.js 环境
+      # 4. 为文章添加 frontmatter
+      - name: Add frontmatter to articles
+        run: |
+          find source/_posts -name "*.md" -type f | while read file; do
+            # 检查文件是否已有 frontmatter（以 --- 开头）
+            if ! head -n 1 "$file" | grep -q "^---$"; then
+              # 提取文件名作为标题（去掉路径和扩展名）
+              title=$(basename "$file" .md)
+              # 提取目录名作为分类
+              category=$(dirname "$file" | sed 's|source/_posts/||' | sed 's|/|-|g')
+              # 获取文件修改时间作为日期
+              date=$(stat -c %y "$file" | cut -d' ' -f1)
+              # 创建临时文件
+              temp_file="${file}.tmp"
+              # 写入 frontmatter
+              echo "---" > "$temp_file"
+              echo "title: $title" >> "$temp_file"
+              echo "date: $date" >> "$temp_file"
+              if [ "$category" != "source/_posts" ]; then
+                echo "categories:" >> "$temp_file"
+                echo "  - $category" >> "$temp_file"
+              fi
+              echo "---" >> "$temp_file"
+              echo "" >> "$temp_file"
+              # 追加原文件内容
+              cat "$file" >> "$temp_file"
+              # 替换原文件
+              mv "$temp_file" "$file"
+            fi
+          done
+
+      # 5. 设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      # 5. 安装依赖
+      # 6. 安装依赖
       - name: Install Dependencies
         run: npm install
 
-      # 6. 清理缓存
+      # 7. 清理缓存
       - name: Clean Cache
         run: npx hexo clean
 
-      # 7. 生成静态文件
+      # 8. 生成静态文件
       - name: Generate Static Files
         run: npx hexo generate
 
-      # 8. 部署到 GitHub Pages
+      # 9. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
