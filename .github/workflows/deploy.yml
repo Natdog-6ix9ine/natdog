@@ -49,10 +49,6 @@ jobs:
               rel_path = str(Path(file_path).relative_to('source/_posts'))
               dir_name = Path(rel_path).parent
 
-              # 获取文件修改时间
-              mtime = os.path.getmtime(file_path)
-              file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
-
               # 提取分类（去掉数字前缀）
               category = None
               if str(dir_name) != '.':
@@ -70,6 +66,17 @@ jobs:
                   has_date = bool(re.search(r'^date:', frontmatter, re.MULTILINE))
                   has_categories = bool(re.search(r'^categories:', frontmatter, re.MULTILINE))
 
+                  # 尝试从 frontmatter 中提取 created 字段作为日期
+                  created_match = re.search(r'^created:\s*(.+)$', frontmatter, re.MULTILINE)
+                  if created_match:
+                      created_value = created_match.group(1).strip()
+                      # 只取日期部分（YYYY-MM-DD）
+                      file_date = created_value[:10]
+                  else:
+                      # 如果没有 created，使用文件修改时间
+                      mtime = os.path.getmtime(file_path)
+                      file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+
                   modified = False
 
                   # 补充缺失字段
@@ -81,7 +88,7 @@ jobs:
                   if not has_date:
                       frontmatter = f'date: {file_date}\n' + frontmatter
                       modified = True
-                      print(f"  Added date: {file_path}")
+                      print(f"  Added date from created: {file_path}")
 
                   if not has_categories and category:
                       frontmatter = f'categories:\n  - {category}\n' + frontmatter
@@ -94,6 +101,10 @@ jobs:
                           f.write(new_content)
               else:
                   # 没有 frontmatter，创建完整的
+                  # 使用文件修改时间作为默认日期
+                  mtime = os.path.getmtime(file_path)
+                  file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
+
                   frontmatter_lines = ['---', f'title: "{file_name}"', f'date: {file_date}']
 
                   if category:
