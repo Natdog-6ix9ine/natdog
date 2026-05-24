@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3_环境工程/新环境写博客.md",
+                "file": "Templates/bug.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "新环境写博客"
+              "title": "bug"
             }
           }
         ]
@@ -193,16 +193,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ea2bc0fa07bed361",
+  "active": "a193a5daf4b732cc",
   "lastOpenFiles": [
-    "3_环境工程/CUDA开发环境搭建.md",
-    "3_环境工程/新环境写博客.md",
-    "3_环境工程/配置昇腾开发环境.md",
-    "3_环境工程/配置环境.md",
-    "3_环境工程/创建算子.md",
-    "Templates/project.md",
     "Templates/essay.md",
+    "Templates/project.md",
+    "Templates/tech-note.md",
     "Templates/bug.md",
+    "3_环境工程/创建算子.md",
+    "3_环境工程/配置环境.md",
+    "3_环境工程/配置昇腾开发环境.md",
+    "3_环境工程/新环境写博客.md",
+    "3_环境工程/CUDA开发环境搭建.md",
     "4_踩坑记录/DataCopy问题.md",
     "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "3_环境工程/SSH配置环境.md",
@@ -214,7 +215,6 @@
     "创建算子.md",
     "测试自动部署.md",
     "配置环境.md",
-    "Templates/tech-note.md",
     "新环境写博客.md",
     "conflict-files-obsidian-git.md",
     "YOLO",
