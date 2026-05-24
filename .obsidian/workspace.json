@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "新环境写博客.md",
+                "file": "Templates/bug.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "新环境写博客"
+              "title": "bug"
             }
           }
         ]
@@ -193,15 +193,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "cc5c6847064bf11e",
+  "active": "a193a5daf4b732cc",
   "lastOpenFiles": [
-    "配置环境.md",
-    "创建算子.md",
     "测试自动部署.md",
+    "创建算子.md",
+    "配置环境.md",
+    "新环境写博客.md",
     "4_踩坑记录/Clash代理连不上linuxdo排查.md",
     "Templates/bug.md",
     "conflict-files-obsidian-git.md",
-    "新环境写博客.md",
     "YOLO",
     "Templates/essay.md",
     "Templates/project.md",
