@@ -33,70 +33,89 @@ jobs:
       # 4. 为文章添加或补充 frontmatter
       - name: Add frontmatter to articles
         run: |
-          find source/_posts -name "*.md" -type f | while read file; do
-            # 提取文件名作为默认标题
-            default_title=$(basename "$file" .md)
-            # 提取相对路径
-            rel_path=$(echo "$file" | sed 's|source/_posts/||')
-            # 提取目录名作为分类
-            dir_name=$(dirname "$rel_path")
-            # 获取文件修改时间作为默认日期
-            default_date=$(stat -c %y "$file" | cut -d' ' -f1)
+          python3 << 'EOF'
+import os
+import re
+from pathlib import Path
+from datetime import datetime
 
-            # 检查文件是否已有 frontmatter（以 --- 开头）
-            if head -n 1 "$file" | grep -q "^---$"; then
-              # 文件已有 frontmatter，检查并补充缺失字段
-              has_title=$(grep -q "^title:" "$file" && echo "yes" || echo "no")
-              has_date=$(grep -q "^date:" "$file" && echo "yes" || echo "no")
+def process_markdown_file(file_path):
+    """处理单个 Markdown 文件的 frontmatter"""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
 
-              if [ "$has_title" = "no" ] || [ "$has_date" = "no" ]; then
-                # 读取 frontmatter 结束位置
-                end_line=$(awk '/^---$/{if(NR>1){print NR; exit}}' "$file")
+    # 提取文件信息
+    file_name = Path(file_path).stem
+    rel_path = str(Path(file_path).relative_to('source/_posts'))
+    dir_name = Path(rel_path).parent
 
-                # 创建临时文件
-                temp_file="${file}.tmp"
-                echo "---" > "$temp_file"
+    # 获取文件修改时间
+    mtime = os.path.getmtime(file_path)
+    file_date = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d')
 
-                # 添加缺失的 title
-                if [ "$has_title" = "no" ]; then
-                  echo "title: \"$default_title\"" >> "$temp_file"
-                fi
+    # 提取分类（去掉数字前缀）
+    category = None
+    if str(dir_name) != '.':
+        category = re.sub(r'^\d+_', '', str(dir_name))
 
-                # 添加缺失的 date
-                if [ "$has_date" = "no" ]; then
-                  echo "date: $default_date" >> "$temp_file"
-                fi
+    # 检查是否有 frontmatter
+    frontmatter_match = re.match(r'^---\n(.*?)\n---\n(.*)$', content, re.DOTALL)
 
-                # 复制原有的 frontmatter（跳过开头的 ---）
-                sed -n '2,'"$((end_line-1))"'p' "$file" >> "$temp_file"
+    if frontmatter_match:
+        # 已有 frontmatter，检查并补充
+        frontmatter = frontmatter_match.group(1)
+        body = frontmatter_match.group(2)
 
-                echo "---" >> "$temp_file"
+        has_title = bool(re.search(r'^title:', frontmatter, re.MULTILINE))
+        has_date = bool(re.search(r'^date:', frontmatter, re.MULTILINE))
+        has_categories = bool(re.search(r'^categories:', frontmatter, re.MULTILINE))
 
-                # 复制正文部分
-                tail -n +$((end_line+1)) "$file" >> "$temp_file"
+        modified = False
 
-                mv "$temp_file" "$file"
-                echo "补充 frontmatter: $file (title=$has_title, date=$has_date)"
-              fi
-            else
-              # 文件没有 frontmatter，创建完整的 frontmatter
-              temp_file="${file}.tmp"
-              echo "---" > "$temp_file"
-              echo "title: \"$default_title\"" >> "$temp_file"
-              echo "date: $default_date" >> "$temp_file"
-              # 只有在子目录中的文章才添加分类
-              if [ "$dir_name" != "." ]; then
-                category=$(echo "$dir_name" | sed 's/^[0-9]*_//')
-                echo "categories:" >> "$temp_file"
-                echo "  - $category" >> "$temp_file"
-              fi
-              echo "---" >> "$temp_file"
-              echo "" >> "$temp_file"
-              cat "$file" >> "$temp_file"
-              mv "$temp_file" "$file"
-              echo "创建 frontmatter: $file"
-            fi
-          done
+        # 补充缺失字段
+        if not has_title:
+            frontmatter = f'title: "{file_name}"\n' + frontmatter
+            modified = True
+            print(f"  Added title: {file_path}")
+
+        if not has_date:
+            frontmatter = f'date: {file_date}\n' + frontmatter
+            modified = True
+            print(f"  Added date: {file_path}")
+
+        if not has_categories and category:
+            frontmatter = f'categories:\n  - {category}\n' + frontmatter
+            modified = True
+            print(f"  Added category '{category}': {file_path}")
+
+        if modified:
+            new_content = f'---\n{frontmatter}\n---\n{body}'
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+    else:
+        # 没有 frontmatter，创建完整的
+        frontmatter_lines = ['---', f'title: "{file_name}"', f'date: {file_date}']
+
+        if category:
+            frontmatter_lines.extend(['categories:', f'  - {category}'])
+
+        frontmatter_lines.append('---')
+        new_content = '\n'.join(frontmatter_lines) + '\n\n' + content
+
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+
+        print(f"  Created frontmatter: {file_path}")
+
+# 处理所有 Markdown 文件
+for root, dirs, files in os.walk('source/_posts'):
+    for file in files:
+        if file.endswith('.md'):
+            file_path = os.path.join(root, file)
+            process_markdown_file(file_path)
+
+print("Frontmatter processing completed!")
+EOF
 
       # 5. 设置 Node.js 环境
       - name: Setup Node.js
