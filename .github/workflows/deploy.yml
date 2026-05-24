@@ -30,58 +30,71 @@ jobs:
           rm -rf source/_posts/.obsidian
           rm -rf source/_posts/.github
 
-      # 4. 为文章添加 frontmatter
+      # 4. 为文章添加或补充 frontmatter
       - name: Add frontmatter to articles
         run: |
           find source/_posts -name "*.md" -type f | while read file; do
+            # 提取文件名作为默认标题
+            default_title=$(basename "$file" .md)
+            # 提取相对路径
+            rel_path=$(echo "$file" | sed 's|source/_posts/||')
+            # 提取目录名作为分类
+            dir_name=$(dirname "$rel_path")
+            # 获取文件修改时间作为默认日期
+            default_date=$(stat -c %y "$file" | cut -d' ' -f1)
+
             # 检查文件是否已有 frontmatter（以 --- 开头）
             if head -n 1 "$file" | grep -q "^---$"; then
-              # 文件已有 frontmatter，检查是否缺少 date 字段
-              if ! grep -q "^date:" "$file"; then
-                # 获取文件修改时间作为日期
-                date=$(stat -c %y "$file" | cut -d' ' -f1)
-                # 在第二个 --- 之前插入 date
-                awk -v date="$date" '
-                  /^---$/ {
-                    if (++count == 2) {
-                      print "date: " date
-                    }
-                  }
-                  { print }
-                ' "$file" > "${file}.tmp"
-                mv "${file}.tmp" "$file"
-                echo "Added date to existing frontmatter: $file"
+              # 文件已有 frontmatter，检查并补充缺失字段
+              has_title=$(grep -q "^title:" "$file" && echo "yes" || echo "no")
+              has_date=$(grep -q "^date:" "$file" && echo "yes" || echo "no")
+
+              if [ "$has_title" = "no" ] || [ "$has_date" = "no" ]; then
+                # 读取 frontmatter 结束位置
+                end_line=$(awk '/^---$/{if(NR>1){print NR; exit}}' "$file")
+
+                # 创建临时文件
+                temp_file="${file}.tmp"
+                echo "---" > "$temp_file"
+
+                # 添加缺失的 title
+                if [ "$has_title" = "no" ]; then
+                  echo "title: \"$default_title\"" >> "$temp_file"
+                fi
+
+                # 添加缺失的 date
+                if [ "$has_date" = "no" ]; then
+                  echo "date: $default_date" >> "$temp_file"
+                fi
+
+                # 复制原有的 frontmatter（跳过开头的 ---）
+                sed -n '2,'"$((end_line-1))"'p' "$file" >> "$temp_file"
+
+                echo "---" >> "$temp_file"
+
+                # 复制正文部分
+                tail -n +$((end_line+1)) "$file" >> "$temp_file"
+
+                mv "$temp_file" "$file"
+                echo "补充 frontmatter: $file (title=$has_title, date=$has_date)"
               fi
             else
               # 文件没有 frontmatter，创建完整的 frontmatter
-              # 提取文件名作为标题（去掉路径和扩展名）
-              title=$(basename "$file" .md)
-              # 提取相对路径
-              rel_path=$(echo "$file" | sed 's|source/_posts/||')
-              # 提取目录名作为分类
-              dir_name=$(dirname "$rel_path")
-              # 获取文件修改时间作为日期
-              date=$(stat -c %y "$file" | cut -d' ' -f1)
-              # 创建临时文件
               temp_file="${file}.tmp"
-              # 写入 frontmatter
               echo "---" > "$temp_file"
-              echo "title: \"$title\"" >> "$temp_file"
-              echo "date: $date" >> "$temp_file"
+              echo "title: \"$default_title\"" >> "$temp_file"
+              echo "date: $default_date" >> "$temp_file"
               # 只有在子目录中的文章才添加分类
               if [ "$dir_name" != "." ]; then
-                # 提取分类名（去掉数字前缀，如 "1_算子开发" -> "算子开发"）
                 category=$(echo "$dir_name" | sed 's/^[0-9]*_//')
                 echo "categories:" >> "$temp_file"
                 echo "  - $category" >> "$temp_file"
               fi
               echo "---" >> "$temp_file"
               echo "" >> "$temp_file"
-              # 追加原文件内容
               cat "$file" >> "$temp_file"
-              # 替换原文件
               mv "$temp_file" "$file"
-              echo "Added full frontmatter to: $file (category: $category)"
+              echo "创建 frontmatter: $file"
             fi
           done
 
